@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldepname
+  labels:
+    app: mysql-dep-label
+    owner: babak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sql-in-deployment
+  template:
+    metadata:
+      labels:
+       app: sql-in-deployment
+    spec:
+      containers:
+      - name: mysql-pod-in-dep
+        image: 328460808357.dkr.ecr.us-east-1.amazonaws.com/a1-db:v1.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "babak"
+        ports:
+        - name: db-dep-ptname
+          containerPort: 3306
+          protocol: TCP

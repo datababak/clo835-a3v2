@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: lab3
+  labels: 
+    app.kubernetese.io/name: mysql
+spec:
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 4Gi
+  #volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce

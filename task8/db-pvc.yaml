@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-pvc-t8-name
+  namespace: lab3
+  labels: 
+    app: db-pvc-t8-label
+spec:
+  storageClassName: localstorage
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce

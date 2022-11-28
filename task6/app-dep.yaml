@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-dep-name
+  namespace: lab3
+  labels:
+    app: app-dep-label 
+spec:
+  selector:
+    matchLabels:
+      app: app-in-deployment
+  replicas: 2
+  template:
+    metadata:
+      labels:
+       app: app-in-deployment
+    spec:
+      containers:
+      - name: app-pod-in-dep
+        image: 328460808357.dkr.ecr.us-east-1.amazonaws.com/a1-app:v1.0
+        env:
+        - name: DBHOST
+          value: clusterip-db-name.lab3
+        - name: DBPORT
+          value: "3306"
+        - name: DBUSER
+          value: root
+        - name: DBPWD
+          value: babak
+        ports:
+        - name: employee-ptname
+          containerPort: 8080
+          protocol: TCP

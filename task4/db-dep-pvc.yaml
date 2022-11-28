@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-dep-name
+  namespace: lab3
+  labels:
+    app: mysql-dep-pvc-label
+    owner: babak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlpvc-in-deployment
+  template:
+    metadata:
+      labels:
+       app: sqlpvc-in-deployment
+    spec:
+      volumes:
+      - name: mysql-4g-pvc-sc
+        persistentVolumeClaim:
+         claimName: mysql-pvc
+      containers:
+      - name: mysql-pod-in-dep
+        image: 328460808357.dkr.ecr.us-east-1.amazonaws.com/a1-db:v2.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "babak"
+        ports:
+        - name: db-dep-ptname
+          containerPort: 3306
+          protocol: TCP
+        volumeMounts:
+          - name: mysql-4g-pvc-sc
+            mountPath: /data/db4g3
+        imagePullPolicy: "Always"
+
